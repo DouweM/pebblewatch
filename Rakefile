@@ -1,6 +1,6 @@
 require "rspec/core/rake_task"
 
-spec = Gem::Specification.load("pebble.gemspec")
+spec = Gem::Specification.load("pebblewatch.gemspec")
 
 RSpec::Core::RakeTask.new(:spec)
 

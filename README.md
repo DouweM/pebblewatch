@@ -2,7 +2,7 @@
 
 A Ruby library for communicating with your Pebble smartwatch.
 
-The protocol implementation was based on the documentation at http://pebbledev.org/, the Python implementation at [Hexxeh/libpebble](https://github.com/) and the .NET implementation at [barometz/flint](https://github.com/).
+The protocol implementation was based on the documentation at http://pebbledev.org/, the Python implementation at [Hexxeh/libpebble](https://github.com/Hexxeh/libpebble) and the .NET implementation at [barometz/flint](https://github.com/barometz/flint).
 
 ## To Do
 
