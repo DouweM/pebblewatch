@@ -1,5 +1,6 @@
-module Pebble
-
-end
-
 require "pebble/version"
+require "pebble/endpoints"
+require "pebble/capabilities"
+require "pebble/system_messages"
+require "pebble/protocol"
+require "pebble/watch"
