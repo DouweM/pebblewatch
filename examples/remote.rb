@@ -7,13 +7,14 @@ def do_osascript(app, command)
 end
 
 def update_metadata
-  artist  = do_osascript(@app, "artist of current track as string")
-  album   = do_osascript(@app, "album of current track as string")
-  track   = do_osascript(@app, "name of current track as string")
+  artist  = do_osascript(@app, "artist of current track as string").strip
+  album   = do_osascript(@app, "album of current track as string").strip
+  track   = do_osascript(@app, "name of current track as string").strip
 
   nowplaying_metadata = [artist, album, track]
 
   if nowplaying_metadata != @nowplaying_metadata
+    puts "Updating nowplaying metadata: #{nowplaying_metadata}"
     @watch.set_nowplaying_metadata(*nowplaying_metadata)
     @nowplaying_metadata = nowplaying_metadata
   end

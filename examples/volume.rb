@@ -18,6 +18,7 @@ def update_metadata
   metadata_text = is_muted? ? "Muted" : "#{current_volume}%"
   
   if metadata_text != @metadata_text
+    puts "Updating metadata: #{metadata_text}"
     @watch.set_nowplaying_metadata("Volume", nil, metadata_text)
     @metadata_text = metadata_text
   end
