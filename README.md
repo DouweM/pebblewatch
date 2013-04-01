@@ -1,4 +1,4 @@
-# pebble-ruby
+# pebblewatch
 
 A Ruby library for communicating with your Pebble smartwatch.
 
