@@ -56,11 +56,11 @@ handler = watch.on_event(:media_control) do |event|
   end
 end
 
-# Suddenly got a change of heart? Just cover your ears.
+# Suddenly had a change of heart? Just cover your ears.
 watch.stop_listening(:media_control, handler)
 
 # To make sure we don't miss any events, we haven't connected yet. 
-# To be able to *send* stuff to the watch, we will now.
+# Because we also want to *send* stuff to the watch, we will now.
 watch.connect
 
 
