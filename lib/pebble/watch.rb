@@ -11,7 +11,7 @@ module Pebble
 
       devices = Dir.glob("/dev/tty.Pebble????-SerialPortSe")
 
-      raise NoWatchesFound if devices.length == 0
+      raise Errors::NoWatchesFound if devices.length == 0
       puts "Found multiple watches" if devices.length > 1
 
       port = devices.first
