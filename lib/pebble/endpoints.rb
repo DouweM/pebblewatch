@@ -20,5 +20,9 @@ module Pebble
     RUNKEEPER           = 7000
     PUT_BYTES           = 48879
     MAX_ENDPOINT        = 65535
+
+    def self.for_code(code)
+      constants.find { |constant| const_get(constant) == code }
+    end
   end
 end

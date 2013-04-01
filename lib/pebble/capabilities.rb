@@ -16,7 +16,7 @@ module Pebble
       SMS           = 32
       GPS           = 64
       BTLE          = 128
-      CAMERA_FRONT  = 240 # No, that doesn't make sense, but it's apparently true.
+      # CAMERA_FRONT  = 240 # Doesn't make sense as it'd mess up the bitmask, but it's apparently true.
       CAMERA_REAR   = 256
       ACCEL         = 512
       GYRO          = 1024
