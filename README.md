@@ -21,7 +21,7 @@ gem install pebblewatch
 
 ## Usage
 
-Make sure your Pebble is paired to your computer and set up as a serial port. We're going to need the path or index of the port, which in the case of OS X looks like `/dev/tty.Pebble7F30-SerialPortSe` for Pebble ID `7F30`. 
+Make sure your Pebble is paired with your computer and set up as a serial port. We're going to need the path or index of the port, which in the case of OS X looks like `/dev/tty.Pebble7F30-SerialPortSe` for Pebble ID `7F30`. 
 
 ```ruby
 require "pebble"

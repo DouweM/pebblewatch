@@ -32,13 +32,11 @@ module Pebble
     end
 
     def connect
-      puts "Connecting with port #{@port}"
-
       @serial_port = SerialPort.new(@port, baudrate: 115200)
       @serial_port.read_timeout = 500
 
       @connected = true
-      puts "Connected"
+      Pebble.logger.debug "Connected to port #{@port}"
       
       @receive_messages_thread = Thread.new(&method(:receive_messages))
 
@@ -79,7 +77,7 @@ module Pebble
 
       message ||= ""
 
-      puts "Sending #{Endpoints.for_code(endpoint)}: #{message.inspect}"
+      Pebble.logger.debug "Sending #{Endpoints.for_code(endpoint)}: #{message.inspect}"
 
       data = [message.size, endpoint].pack("S>S>") + message
 
@@ -119,7 +117,7 @@ module Pebble
 
     private
       def receive_messages
-        puts "Waiting for messages"
+        Pebble.logger.debug "Waiting for messages"
         while @connected
           header = @serial_port.read(4)
           next unless header
@@ -129,18 +127,18 @@ module Pebble
           size, endpoint = header.unpack("S>S>")
           message = @serial_port.read(size)
 
-          puts "Received #{Endpoints.for_code(endpoint)}: #{message.inspect}"
+          Pebble.logger.debug "Received #{Endpoints.for_code(endpoint)}: #{message.inspect}"
 
           trigger_received(endpoint, message)
         end
       rescue IOError => e
         if @connected
-          puts "Lost connection"
+          Pebble.logger.debug "Lost connection"
           @connected = false
           raise Errors::LostConnection
         end
       ensure
-        puts "Finished waiting for messages"
+        Pebble.logger.debug "Finished waiting for messages"
       end
 
       def trigger_received(endpoint, message)

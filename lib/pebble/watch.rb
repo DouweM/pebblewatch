@@ -9,14 +9,14 @@ module Pebble
     def self.autodetect
       return nil unless RUBY_PLATFORM =~ /darwin/
 
-      devices = Dir.glob("/dev/tty.Pebble????-SerialPortSe")
+      watches = Dir.glob("/dev/tty.Pebble????-SerialPortSe")
 
-      raise Errors::NoWatchesFound if devices.length == 0
-      puts "Found multiple watches" if devices.length > 1
+      raise Errors::NoWatchesFound if watches.length == 0
+      Pebble.logger.debug "Found multiple watches: #{watches}" if watches.length > 1
 
-      port = devices.first
+      port = watches.first
       id = port[15, 4]
-      puts "Found watch with ID #{id}"
+      Pebble.logger.debug "Detected watch with ID #{id}"
 
       return new(id, port)
     end
@@ -50,8 +50,8 @@ module Pebble
       @client_capabilities  = Capabilities::Client::TELEPHONY | Capabilities::Client::SMS | Capabilities::Client::ANDROID
 
       answer_phone_version_message
-      
       receive_event_messages
+      log_log_events
     end
 
     def connect
@@ -177,7 +177,7 @@ module Pebble
     end
 
     def system_message(code)
-      puts "Sending system message #{SystemMessages.for_code(code)}"
+      Pebble.logger.debug "Sending system message #{SystemMessages.for_code(code)}"
 
       message = [code].pack("S>")
 
@@ -213,8 +213,25 @@ module Pebble
         end
       end
 
+      def log_log_events
+        on_event(:log) do |event|
+          case event.level
+          when :error
+            Pebble.logger.error event.message
+          when :warning
+            Pebble.logger.warn event.message
+          when :info
+            Pebble.logger.info event.message
+          when :debug, :verbose
+            Pebble.logger.debug event.message
+          else
+            Pebble.logger.info event.message
+          end
+        end
+      end
+
       def trigger_event(name, event)
-        puts "Event '#{name}': #{event.inspect}"
+        Pebble.logger.debug "Triggering event '#{name}': #{event.inspect}"
 
         @event_handlers[:any].each do |handler|
           Thread.new(handler) do |handler|
