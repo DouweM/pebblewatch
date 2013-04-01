@@ -1,7 +1,9 @@
 module Pebble
   class Watch
     class Event
-
+      def self.parse(message)
+        new
+      end
     end
   end
 end
