@@ -116,8 +116,18 @@ watch.listen_for_events
 watch.disconnect
 ```
 
+Oh, and if you want to do some lower level stuff, have a look at [`Pebble::Protocol`](lib/pebble/protocol.rb) which you can access through `watch.protocol`.
+
+```ruby
+watch.protocol.on_receive(endpoint) do |message|
+  # Do whatever
+end
+
+watch.protocol.send_message(endpoint, message)
+```
+
 ## Examples
-Check out the `examples/` folder for two examples that I actually use myself. They're kind of similar, but should give you an idea of how this whole thing works.
+Check out the [`examples/`](examples) folder for two examples that I actually use myself. They're kind of similar, but should give you an idea of how this whole thing works.
 
 ## License
 Copyright (c) 2013 Douwe Maan
