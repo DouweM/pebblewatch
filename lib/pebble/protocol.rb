@@ -77,12 +77,12 @@ module Pebble
 
       message ||= ""
 
-      Pebble.logger.debug "Sending #{Endpoints.for_code(endpoint)}: #{message.inspect}"
+      Pebble.logger.debug "Sending #{Endpoints.for_code(endpoint) || endpoint}: #{message.inspect}"
 
       data = [message.size, endpoint].pack("S>S>") + message
 
       @send_message_mutex.synchronize do
-        @serial_port.write data
+        @serial_port.write(data)
 
         if response_parser
           if async_response_handler
@@ -127,7 +127,7 @@ module Pebble
           size, endpoint = header.unpack("S>S>")
           message = @serial_port.read(size)
 
-          Pebble.logger.debug "Received #{Endpoints.for_code(endpoint)}: #{message.inspect}"
+          Pebble.logger.debug "Received #{Endpoints.for_code(endpoint) || endpoint}: #{message.inspect}"
 
           trigger_received(endpoint, message)
         end

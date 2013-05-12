@@ -200,9 +200,10 @@ module Pebble
 
       def receive_event_messages
         events = [
-          [:log,            Endpoints::LOGS,            LogEvent],
-          [:system_message, Endpoints::SYSTEM_MESSAGE,  SystemMessageEvent],
-          [:media_control,  Endpoints::MUSIC_CONTROL,   MediaControlEvent]
+          [:log,            Endpoints::LOGS,                LogEvent],
+          [:system_message, Endpoints::SYSTEM_MESSAGE,      SystemMessageEvent],
+          [:media_control,  Endpoints::MUSIC_CONTROL,       MediaControlEvent],
+          [:app_message,    Endpoints::APPLICATION_MESSAGE, AppMessageEvent]
         ]
 
         events.each do |(name, endpoint, event_klass)|

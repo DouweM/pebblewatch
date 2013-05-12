@@ -7,6 +7,8 @@ module Pebble
     SYSTEM_MESSAGE      = 18
     MUSIC_CONTROL       = 32
     PHONE_CONTROL       = 33
+    APPLICATION_MESSAGE = 48
+    LAUNCHER            = 49
     LOGS                = 2000
     PING                = 2001
     DRAW                = 2002
