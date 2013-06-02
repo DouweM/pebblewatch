@@ -9,6 +9,7 @@ The protocol implementation was based on the documentation at http://pebbledev.o
 - [x] Basic protocol communication
 - [x] Sending of messages (notifications etc)
 - [x] Receiving of events (log, music control)
+- [ ] Full 2-way app message support
 - [ ] Firmware/app uploading
 - [ ] CLI
 - [ ] REPL
