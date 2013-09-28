@@ -18,7 +18,11 @@ Gem::Specification.new do |s|
   s.require_path  = "lib"
 
   s.add_runtime_dependency "serialport", "~> 1.1"
-  
+  s.add_runtime_dependency "json", "~> 1.8"
+  s.add_runtime_dependency "rubyzip", "~> 1.0"
+  s.add_runtime_dependency "bindata", "~> 1.6"
+
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
 end
+

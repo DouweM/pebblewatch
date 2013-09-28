@@ -23,3 +23,5 @@ require "pebble/capabilities"
 require "pebble/system_messages"
 require "pebble/protocol"
 require "pebble/watch"
+require "pebble/bundle"
+
