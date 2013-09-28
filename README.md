@@ -130,7 +130,7 @@ watch.protocol.send_message(endpoint, message)
 There is also rudimentary support for reading the Pebble Bundle `.pbw` file format. Use the [`Pebble::Bundle`](lib/pebble/bundle.rb) class to parse a bundle file and read information. Also take a look at the [example](examples/bundle.rb)
 
 ```ruby
-bundle = Pebble::Bundle.new "my-pebble-bundle.pbw"
+bundle = Pebble::Bundle.new("my-pebble-bundle.pbw")
 
 bundle.is_app?
 # => true

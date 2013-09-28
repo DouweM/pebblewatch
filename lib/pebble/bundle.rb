@@ -32,12 +32,11 @@ module Pebble
   end
 
   class Bundle
+    attr_reader :path
+
     def initialize(path)
       @path = path
     end
-
-    attr_reader :path
-
 
     def manifest
       @manifest ||= JSON.parse(zip.file.read("manifest.json"))
@@ -75,27 +74,28 @@ module Pebble
     end
 
     def uuid_hex
-      header.uuid.map{ |byte| byte.to_i.to_s(16) }
+      header.uuid.map { |byte| byte.to_i.to_s(16) }
     end
 
     def uuid_hex_string
-      header.uuid.map{ |byte| "%02X" % byte.to_i }.join(' ')
+      header.uuid.map { |byte| "%02X" % byte.to_i }.join(' ')
     end
 
     def close
+      return unless @zip
+
       zip.close
       @zip = nil
     end
 
-
     private
-    def zip
-      @zip ||= Zip::File.open(path)
-    end
+      def zip
+        @zip ||= Zip::File.open(path)
+      end
 
-    def bin
-      @bin ||= @zip.file.read("pebble-app.bin")
-    end
+      def bin
+        @bin ||= zip.file.read("pebble-app.bin")
+      end
   end
 end
 
